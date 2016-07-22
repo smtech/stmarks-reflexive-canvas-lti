@@ -1,0 +1,50 @@
+{
+    "name": "smtech/stmarks-reflexive-canvas-lti",
+    "description": "A toolbox for managing LTI authentication and tool provider development (with St. Mark's templating)",
+    "license": "LGPL-3.0",
+    "authors": [
+        {
+            "name": "Seth Battis",
+            "email": "sethbattis@stmarksschool.org"
+        }
+    ],
+    "config": {
+        "secure-http": false
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "spvsoftwareproducts/LTI_Tool_Provider",
+                "version": "2.5.01",
+                "dist": {
+                    "url": "http://projects.oscelot.org/gf/download/frsrelease/956/6025/LTI_Tool_Provider-2.5.01.zip",
+                    "type": "zip"
+                },
+                "license": "LGPL-3.0",
+                "authors": [
+                    {
+                        "name": "Stephen Vickers"
+                    }
+                ],
+                "homepage": "http://spvsoftwareproducts.com/php/lti_tool_provider/",
+                "autoload": {
+                    "psr-4": {
+                        "" : ""
+                    }
+                }
+            }
+        }
+    ],
+    "require": {
+        "smtech/reflexive-canvas-lti": "~1.0",
+        "smtech/stmarkssmarty": "~0.5",
+        "battis/simplecache": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "smtech\\StMarksReflexiveCanvasLTI\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
