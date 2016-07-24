@@ -4,27 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba300b891be84027f1cdc753ab8cdeb7",
-    "content-hash": "67f5dbad4a885c1a787ef4a33de13f1d",
+    "hash": "152652125081cca9f2d67b5f55010164",
+    "content-hash": "7ab30777a52774363718834bc9b0fcdf",
     "packages": [
         {
             "name": "battis/appmetadata",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/battis/appmetadata.git",
-                "reference": "a97bdc20627008ed165b638737b618a0d6f606c2"
+                "reference": "1d9f4c7e29576dbd4ae0b56bd97c29fc8ff4c3b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/battis/appmetadata/zipball/a97bdc20627008ed165b638737b618a0d6f606c2",
-                "reference": "a97bdc20627008ed165b638737b618a0d6f606c2",
+                "url": "https://api.github.com/repos/battis/appmetadata/zipball/1d9f4c7e29576dbd4ae0b56bd97c29fc8ff4c3b5",
+                "reference": "1d9f4c7e29576dbd4ae0b56bd97c29fc8ff4c3b5",
                 "shasum": ""
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Battis\\": ""
+                    "Battis\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -38,7 +38,7 @@
                 }
             ],
             "description": "An object to store app metadata backed by a MySQL table",
-            "time": "2015-10-22 20:25:29"
+            "time": "2016-07-22 06:29:17"
         },
         {
             "name": "battis/bootstrapsmarty",
@@ -664,12 +664,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "6d7d36d9a675f69a18f5a8722dd22c0f2f70504d"
+                "reference": "f74a0d575a99bc9b0e307c2698a3756c2ac9fab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/6d7d36d9a675f69a18f5a8722dd22c0f2f70504d",
-                "reference": "6d7d36d9a675f69a18f5a8722dd22c0f2f70504d",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/f74a0d575a99bc9b0e307c2698a3756c2ac9fab1",
+                "reference": "f74a0d575a99bc9b0e307c2698a3756c2ac9fab1",
                 "shasum": ""
             },
             "require": {
@@ -711,7 +711,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-07-19 18:22:10"
+            "time": "2016-07-24 18:31:27"
         },
         {
             "name": "smtech/canvaspest",
@@ -787,16 +787,16 @@
         },
         {
             "name": "smtech/reflexive-canvas-lti",
-            "version": "v1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smtech/reflexive-canvas-lti.git",
-                "reference": "502df936e079867fa179217901b43c8881cd2613"
+                "reference": "2d4793376277662d0473c25a54a0c8ba9a0d84d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smtech/reflexive-canvas-lti/zipball/502df936e079867fa179217901b43c8881cd2613",
-                "reference": "502df936e079867fa179217901b43c8881cd2613",
+                "url": "https://api.github.com/repos/smtech/reflexive-canvas-lti/zipball/2d4793376277662d0473c25a54a0c8ba9a0d84d1",
+                "reference": "2d4793376277662d0473c25a54a0c8ba9a0d84d1",
                 "shasum": ""
             },
             "require": {
@@ -826,7 +826,7 @@
                 }
             ],
             "description": "LTI tool provider class that includes the \"reflexive\" reach back into Canvas via the API",
-            "time": "2016-07-21 02:40:30"
+            "time": "2016-07-24 21:05:02"
         },
         {
             "name": "smtech/stmarks-colors",
@@ -863,16 +863,16 @@
         },
         {
             "name": "smtech/stmarkssmarty",
-            "version": "v0.5",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smtech/stmarks-bootstrapsmarty.git",
-                "reference": "ddb27fba830765e3f663b693c7eb79746d97a8d4"
+                "reference": "450cf001ba521ef85b288eef5b8a97a6e4bbef3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smtech/stmarks-bootstrapsmarty/zipball/ddb27fba830765e3f663b693c7eb79746d97a8d4",
-                "reference": "ddb27fba830765e3f663b693c7eb79746d97a8d4",
+                "url": "https://api.github.com/repos/smtech/stmarks-bootstrapsmarty/zipball/450cf001ba521ef85b288eef5b8a97a6e4bbef3f",
+                "reference": "450cf001ba521ef85b288eef5b8a97a6e4bbef3f",
                 "shasum": ""
             },
             "require": {
@@ -899,7 +899,7 @@
                 }
             ],
             "description": "A standard Smarty install for St. Mark's projects",
-            "time": "2016-03-17 20:07:04"
+            "time": "2016-07-22 02:17:49"
         },
         {
             "name": "spvsoftwareproducts/LTI_Tool_Provider",
@@ -912,9 +912,9 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "": ""
-                }
+                "classmap": [
+                    ""
+                ]
             },
             "license": [
                 "LGPL-3.0"
@@ -930,7 +930,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "smtech/reflexive-canvas-lti": 20,
+        "smtech/stmarkssmarty": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
