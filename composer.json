@@ -35,8 +35,8 @@
         }
     ],
     "require": {
-        "smtech/reflexive-canvas-lti": "dev-master",
-        "smtech/stmarkssmarty": "dev-master",
+        "smtech/reflexive-canvas-lti": "~1.0",
+        "smtech/stmarkssmarty": "~0.5",
         "battis/simplecache": "~1.0"
     },
     "autoload": {
@@ -44,5 +44,5 @@
             "smtech\\StMarksReflexiveCanvasLTI\\": "src"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
