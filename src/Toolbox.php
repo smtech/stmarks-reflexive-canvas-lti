@@ -178,6 +178,18 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
     }
 
     /**
+     * Prepend an over-riding template directory to Smarty
+     *
+     * @link https://htmlpreview.github.io/?https://raw.githubusercontent.com/battis/BootstrapSmarty/master/doc/classes/Battis.BootstrapSmarty.BootstrapSmarty.html#method_prependTemplateDir Pass-through to `BootstrapSmarty::prependTemplateDir()`
+     *
+     * @param string $template
+     * @param string $key (Optional)
+     */
+    public function smarty_prependTemplateDir($template, $key = null) {
+        return $this->getSmarty()->prependTemplateDir($template, $key);
+    }
+
+    /**
      * Display an HTML template
      *
      * @link https://htmlpreview.github.io/?https://raw.githubusercontent.com/battis/BootstrapSmarty/master/doc/classes/Battis.BootstrapSmarty.BootstrapSmarty.html#method_display Pass-through to `BootstrapSmarty::display()`

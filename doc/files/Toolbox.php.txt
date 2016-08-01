@@ -12,7 +12,8 @@ use smtech\StMarksSmarty\StMarksSmarty;
  * @author Seth Battis <SethBattis@stmarksschool.org>
  * @version v0.1
  */
-class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
+class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
+{
 
     /**
      * Cache manager
@@ -35,7 +36,8 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      * @param boolean $forceRecache (Optional, default `false`)
      * @return void
      */
-    protected function loadConfiguration($configFilePath, $forceRecache = false) {
+    protected function loadConfiguration($configFilePath, $forceRecache = false)
+    {
         $result = parent::loadConfiguration($configFilePath, $forceRecache);
 
         if ($forceRecache || empty($this->config('APP_PATH'))) {
@@ -52,7 +54,8 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      *
      * @param HierarchicalSimpleCache $cache
      */
-    public function setCache(HierarchicalSimpleCache $cache) {
+    public function setCache(HierarchicalSimpleCache $cache)
+    {
         $this->cache = $cache;
     }
 
@@ -61,9 +64,10 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      *
      * @return [type] [description]
      */
-    public function getCache() {
+    public function getCache()
+    {
         if (empty($this->cache)) {
-            $this->cache = new HierarchicalSimpleCache($this->getMySQL());
+            $this->cache = new HierarchicalSimpleCache($this->getMySQL(), basename(__FILE__, '.php'));
         }
         return $this->cache;
     }
@@ -76,7 +80,8 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      * @param  string $layer
      * @return string
      */
-    public function cache_pushKey($layer) {
+    public function cache_pushKey($layer)
+    {
         return $this->getCache()->pushKey($layer);
     }
 
@@ -87,7 +92,8 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      *
      * @return string|null
      */
-    public function cache_popKey() {
+    public function cache_popKey()
+    {
         return $this->getCache()->popKey();
     }
 
@@ -99,7 +105,8 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      * @param string $key
      * @return mixed
      */
-    public function cache_get($key) {
+    public function cache_get($key)
+    {
         return $this->getCache()->getCache($key);
     }
 
@@ -112,7 +119,8 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      * @param mixed $data
      * @return boolean
      */
-    public function cache_set($key, $data) {
+    public function cache_set($key, $data)
+    {
         return $this->getCache()->setCache($key, $data);
     }
 
@@ -121,7 +129,8 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      *
      * @param StMarksSmarty $smarty
      */
-    public function setSmarty(StMarksSmarty $smarty) {
+    public function setSmarty(StMarksSmarty $smarty)
+    {
         $this->smarty = $smarty;
     }
 
@@ -130,11 +139,11 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      *
      * @return StMarksSmarty
      */
-    public function getSmarty() {
+    public function getSmarty()
+    {
         if (empty($this->smarty)) {
             $this->smarty = StMarksSmarty::getSmarty();
-            $this->smarty->addTemplateDir(__DIR__ . '/templates', 'starter-canvas-api-via-lti');
-        	$this->smarty->setFramed(true);
+            $this->smarty->setFramed(true);
         }
         return $this->smarty;
     }
@@ -149,7 +158,8 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      * @param boolean $noCache (Optional, default `false`)
      * @return void
      */
-    public function smarty_assign($varname, $var, $noCache = false) {
+    public function smarty_assign($varname, $var = null, $noCache = false)
+    {
         return $this->getSmarty()->assign($varname, $var, $noCache);
     }
 
@@ -162,8 +172,21 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      * @param string $key (Optional, default `null`)
      * @param boolean $isConfig (Optional, default `false`)
      */
-    public function smarty_addTemplateDir($template, $key = null, $isConfig = false) {
-        return $this->getSmarty()->assign($template, $key, $isConfig);
+    public function smarty_addTemplateDir($template, $key = null, $isConfig = false)
+    {
+        return $this->getSmarty()->addTemplateDir($template, $key, $isConfig);
+    }
+
+    /**
+     * Prepend an over-riding template directory to Smarty
+     *
+     * @link https://htmlpreview.github.io/?https://raw.githubusercontent.com/battis/BootstrapSmarty/master/doc/classes/Battis.BootstrapSmarty.BootstrapSmarty.html#method_prependTemplateDir Pass-through to `BootstrapSmarty::prependTemplateDir()`
+     *
+     * @param string $template
+     * @param string $key (Optional)
+     */
+    public function smarty_prependTemplateDir($template, $key = null) {
+        return $this->getSmarty()->prependTemplateDir($template, $key);
     }
 
     /**
@@ -177,7 +200,8 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox {
      * @param string $parent (Optional, default `null`)
      * @return void
      */
-    public function smarty_display($template = 'page.tpl', $cache_id = null, $compile_id = null, $parent = null) {
+    public function smarty_display($template = 'page.tpl', $cache_id = null, $compile_id = null, $parent = null)
+    {
         return $this->getSmarty()->display($template, $cache_id, $compile_id, $parent);
     }
 }
