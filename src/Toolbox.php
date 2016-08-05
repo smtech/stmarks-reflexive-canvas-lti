@@ -2,9 +2,15 @@
 
 namespace smtech\StMarksReflexiveCanvasLTI;
 
+use LTI_Tool_Consumer;
+use LTI_Data_Connector;
+
 use Battis\HierarchicalSimpleCache;
 use Battis\DataUtilities;
+use Battis\BootstrapSmarty\NotificationMessage;
+
 use smtech\StMarksSmarty\StMarksSmarty;
+use smtech\ReflexiveCanvasLTI\Exception\ConfigurationException;
 
 /**
  * Add HTML templating and basic caching to the ReflexiveCanvasLTI Toolbox
@@ -40,6 +46,12 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
     {
         $result = parent::loadConfiguration($configFilePath, $forceRecache);
 
+        /* patch in passed back API access token, if present */
+        if (!empty($_SESSION['TOOL_CANVAS_API'])) {
+            $this->metadata['TOOL_CANVAS_API'] = $_SESSION['TOOL_CANVAS_API'];
+            unset($_SESSION['TOOL_CANVAS_API']);
+        }
+
         if ($forceRecache || empty($this->config('APP_PATH'))) {
             $this->config('APP_PATH', dirname($this->config('TOOL_CONFIG_FILE')));
         }
@@ -47,6 +59,141 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
         if ($forceRecache || empty($this->config('APP_URL'))) {
             $this->config('APP_URL', DataUtilities::URLfromPath($this->config('APP_PATH')));
         }
+    }
+
+    /**
+     * Interactively acquire an API access token
+     *
+     * `/config/canvas/key` and `/config/canvas/secret` must be defined in
+     * `config.xml`
+     *
+     * @param string $reason Explanation of why an API access token is necessary
+     * @param string $redirectURL (Optional, defaults to
+     *     `$_SERVER['REQUEST_URI']`) URL of page to redirect to after
+     *     acquiring access token
+     * @param string $errorURL (Optional) URL of page to redirect to on error
+     * @return void
+     */
+    public function interactiveGetAccessToken($reason = null, $redirectURL = null, $errorURL = null)
+    {
+        $redirectURL = (
+            empty($redirectURL) ?
+                $_SERVER['REQUEST_URI'] :
+                $redirectURL
+        );
+        $errorURL = (
+            empty($errorURL) ?
+                DataUtilities::URLfromPath(__DIR__ . '/../error.php') :
+                $errorURL
+        );
+        $canvas = $this->metadata['TOOL_CANVAS_API'];
+        if (!empty($canvas['key']) && !empty($canvas['secret'])) {
+            /* if so, request an API access token interactively */
+            header(
+                'Location: ' . DataUtilities::URLfromPath(__DIR__ . '/../oauth.php') .
+                "?oauth-return=$redirectURL&oauth-error=$errorURL" .
+                (empty($reason) ? '' : "&reason=$reason")
+            );
+            exit;
+        } else { /* no (understandable) API credentials available -- doh! */
+            throw new ConfigurationException(
+                'Missing OAuth key/secret pair in configuration, which is ' .
+                'required to interactively acquire an API access token',
+                ConfigurationException::CANVAS_API_MISSING
+            );
+        }
+    }
+
+    /**
+     * Create a (potentially new) LTI_Tool_Consumer
+     *
+     * @param string $key (Optional)
+     * @return LTI_Tool_Consumer
+     */
+    private function interactiveConsumersControlPanel_loadConsumer($key = null)
+    {
+        /*
+         * load an existing consumer (if we have a consumer_key) or create a blank
+         * that we will fill in
+         */
+        $consumer = new LTI_Tool_Consumer(
+            (empty($key) ? LTI_Data_Connector::getRandomString(32) : $key),
+            $this->getToolProvider()->data_connector,
+            true // wicked confusing _not_ to autoenable
+        );
+
+        /* pre-fill secret if not editing an existing consumer */
+        if (empty($key)) {
+            $consumer->secret = LTI_Data_Connector::getRandomString(32);
+        }
+
+        return $consumer;
+    }
+
+    /**
+     * Handle tool consumer management interactively
+     *
+     * @return void
+     */
+    public function interactiveConsumersControlPanel()
+    {
+        /* clean request values */
+        $name = (empty($_POST['name']) ? null : trim($_POST['name']));
+        $key = (empty($_POST['key']) ? null : trim($_POST['key']));
+        $secret = (empty($_POST['secret']) ? null : trim($_POST['secret']));
+        $enabled = (empty($_POST['enabled']) ? false : (boolean) $_POST['enabled']);
+        $action = (empty($_POST['action']) ? false : strtolower(trim($_POST['action'])));
+
+        /* load requested consumer (or create new if none requested) */
+        $consumer = $this->interactiveConsumersControlPanel_loadConsumer($key);
+
+        /* what are we asked to do with this consumer? */
+        switch ($action) {
+            case 'update':
+            case 'insert': {
+                $consumer->name = $name;
+                $consumer->secret = $secret;
+                $consumer->enabled = $enabled;
+                if (!$consumer->save()) {
+                    $this->smarty_addMessage(
+                        'Error saving consumer',
+                        'There was an error attempting to save your new or ' .
+                        'updated consumer information to the database.',
+                        NotificationMessage::ERROR
+                    );
+                }
+                break;
+            }
+            case 'delete': {
+                $consumer->delete();
+                break;
+            }
+            case 'select': {
+                $this->smarty_assign('key', $key);
+                break;
+            }
+        }
+
+        /*
+         * if action was anything other than 'select', create a new empty
+         * consumer to fill the form with
+         */
+        if ($action && $action !== 'select') {
+            $consumer = $this->interactiveConsumersControlPanel_loadConsumer();
+        }
+
+        /* display a list of consumers */
+        $consumers = $this->lti_getConsumers();
+        $this->smarty_assign([
+            'name' => 'Consumers',
+            'category' => 'Control Panel',
+            'consumers' => $consumers,
+            'consumer' => $consumer,
+            'formAction' => $_SERVER['PHP_SELF'],
+            'appUrl' => $this->metadata['APP_URL']
+        ]);
+        $this->smarty_display('consumers-control-panel.tpl');
+        exit;
     }
 
     /**
