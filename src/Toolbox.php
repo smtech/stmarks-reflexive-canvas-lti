@@ -34,8 +34,17 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
     protected $smarty;
 
     /**
-     * @inheritDoc
+     * Update a Toolbox instance from a configuration file
      *
+     * Extends the inherited `Toolbox::loadConfiguration()` to add two
+     * additional pieces of configuration metadata:
+     *
+     *   - `APP_PATH` is the path to the Tool Provider app
+     *   - `APP_URL` is the URL of the Tool Provider app
+     *
+     * Also stores the API access token acquired by `interactiveGetAccessToken()`.
+     *
+     * @see interactiveGetAccessToken() `interactiveGetAccessToken()`
      * @link https://htmlpreview.github.io/?https://raw.githubusercontent.com/smtech/reflexive-canvas-lti/master/doc/classes/smtech.ReflexiveCanvasLTI.Toolbox.html#method_loadConfiguration `smtech\ReflexiveCanvasLTI\Toolbox::loadConfiguration()`
      *
      * @param string $configFilePath
@@ -65,7 +74,7 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
      * Interactively acquire an API access token
      *
      * `/config/canvas/key` and `/config/canvas/secret` must be defined in
-     * `config.xml`
+     * `config.xml` for this to work!
      *
      * @param string $reason Explanation of why an API access token is necessary
      * @param string $redirectURL (Optional, defaults to
@@ -89,10 +98,21 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
         $canvas = $this->metadata['TOOL_CANVAS_API'];
         if (!empty($canvas['key']) && !empty($canvas['secret'])) {
             /* if so, request an API access token interactively */
+            if (session_status() !== PHP_SESSION_ACTIVE) {
+                session_start();
+            }
+            $_SESSION['oauth'] = [
+                'purpose' => $this->metadata['TOOL_NAME'],
+                'key' => $canvas['key'],
+                'secret' => $canvas['secret']
+            ];
             header(
                 'Location: ' . DataUtilities::URLfromPath(__DIR__ . '/../oauth.php') .
-                "?oauth-return=$redirectURL&oauth-error=$errorURL" .
-                (empty($reason) ? '' : "&reason=$reason")
+                '?' . http_build_query([
+                    'oauth-return' => $redirectURL,
+                    'oauth-error' => $errorURL,
+                    'reason' => $reason
+                ])
             );
             exit;
         } else { /* no (understandable) API credentials available -- doh! */
@@ -133,6 +153,10 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
     /**
      * Handle tool consumer management interactively
      *
+     * Display and manage a control panel for managing Tool Consumers
+     * interactively.
+     *
+     * @uses interactiveConsumersControlPanel_loadConsumer() `interactiveConsumersControlPanel_loadConsumer()`
      * @return void
      */
     public function interactiveConsumersControlPanel()

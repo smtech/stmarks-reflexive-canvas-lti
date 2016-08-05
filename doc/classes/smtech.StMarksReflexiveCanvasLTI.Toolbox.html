@@ -114,7 +114,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">2</span>
+                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">1</span>
                                 </a>
                             </li>
                             <li>
@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1267033936"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-718282925"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1267033936" class="accordion-body collapse in">
+            <div id="namespace-718282925" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1919551326"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1103228793"></a>
                                 <a href="../namespaces/smtech.html" style="margin-left: 30px; padding-left: 0">smtech</a>
             </div>
-            <div id="namespace-1919551326" class="accordion-body collapse ">
+            <div id="namespace-1103228793" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1653116523"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-517468635"></a>
                                 <a href="../namespaces/smtech.StMarksReflexiveCanvasLTI.html" style="margin-left: 30px; padding-left: 0">StMarksReflexiveCanvasLTI</a>
             </div>
-            <div id="namespace-1653116523" class="accordion-body collapse ">
+            <div id="namespace-517468635" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -224,6 +224,8 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
+                                                                    <a href="../classes/smtech.StMarksReflexiveCanvasLTI.Toolbox.html#method_interactiveGetAccessToken" class="">interactiveGetAccessToken()</a><br />
+                                                                    <a href="../classes/smtech.StMarksReflexiveCanvasLTI.Toolbox.html#method_interactiveConsumersControlPanel" class="">interactiveConsumersControlPanel()</a><br />
                                                                     <a href="../classes/smtech.StMarksReflexiveCanvasLTI.Toolbox.html#method_setCache" class="">setCache()</a><br />
                                                                     <a href="../classes/smtech.StMarksReflexiveCanvasLTI.Toolbox.html#method_getCache" class="">getCache()</a><br />
                                                                     <a href="../classes/smtech.StMarksReflexiveCanvasLTI.Toolbox.html#method_cache_pushKey" class="">cache_pushKey()</a><br />
@@ -258,7 +260,7 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <em>No private methods found</em>
+                                                                    <a href="../classes/smtech.StMarksReflexiveCanvasLTI.Toolbox.html#method_interactiveConsumersControlPanel_loadConsumer" class="">interactiveConsumersControlPanel_loadConsumer()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -374,6 +376,82 @@
                 <div class="span8 content class"><h2>Methods</h2></div>
                 <aside class="span4 detailsbar"></aside>
             </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_interactiveGetAccessToken" name="method_interactiveGetAccessToken" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">interactiveGetAccessToken()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">interactiveGetAccessToken(string  <span class="argument">$reason = null</span>, string  <span class="argument">$redirectURL = null</span>, string  <span class="argument">$errorURL = null</span>) : void</pre>
+                <p><em>Interactively acquire an API access token</em></p>
+                <p><code>/config/canvas/key</code> and <code>/config/canvas/secret</code> must be defined in
+<code>config.xml</code> for this to work!</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$reason </td>
+                                <td><p>Explanation of why an API access token is necessary</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$redirectURL </td>
+                                <td><p>(Optional, defaults to
+<code>$_SERVER['REQUEST_URI']</code>) URL of page to redirect to after
+acquiring access token</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$errorURL </td>
+                                <td><p>(Optional) URL of page to redirect to on error</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_interactiveConsumersControlPanel" name="method_interactiveConsumersControlPanel" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">interactiveConsumersControlPanel()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">interactiveConsumersControlPanel() : void</pre>
+                <p><em>Handle tool consumer management interactively</em></p>
+                <p>Display and manage a control panel for managing Tool Consumers
+interactively.</p>
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                                            <dt>Uses</dt>
+                                                                <dd>interactiveConsumersControlPanel_loadConsumer()</dd>
+                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
@@ -840,8 +918,14 @@
                 <h3 class="protected ">loadConfiguration()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">loadConfiguration(string  <span class="argument">$configFilePath</span>, boolean  <span class="argument">$forceRecache = false</span>) : void</pre>
-                <p><em></em></p>
-                
+                <p><em>Update a Toolbox instance from a configuration file</em></p>
+                <p>Extends the inherited <code>Toolbox::loadConfiguration()</code> to add two
+additional pieces of configuration metadata:</p>
+<ul>
+<li><code>APP_PATH</code> is the path to the Tool Provider app</li>
+<li><code>APP_URL</code> is the URL of the Tool Provider app</li>
+</ul>
+<p>Also stores the API access token acquired by <code>interactiveGetAccessToken()</code>.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -865,23 +949,53 @@
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
                                                                                             <dt>See also</dt>
-                                                                <dd><a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/smtech/reflexive-canvas-lti/master/doc/classes/smtech.ReflexiveCanvasLTI.Toolbox.html#method_loadConfiguration"><span class="namespace-wrapper">`smtech\ReflexiveCanvasLTI\Toolbox::loadConfiguration()`</span></a></dd>
+                                                                <dd><a href="../classes/smtech.StMarksReflexiveCanvasLTI.Toolbox.html#method_interactiveGetAccessToken"><span class="namespace-wrapper">`interactiveGetAccessToken()`</span></a></dd>
+                                                                                                    <dd><a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/smtech/reflexive-canvas-lti/master/doc/classes/smtech.ReflexiveCanvasLTI.Toolbox.html#method_loadConfiguration"><span class="namespace-wrapper">`smtech\ReflexiveCanvasLTI\Toolbox::loadConfiguration()`</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            inheritDoc
-                        </th>
-                        <td>
-                                                                                            
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
 
-                                                    </div>
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_interactiveConsumersControlPanel_loadConsumer" name="method_interactiveConsumersControlPanel_loadConsumer" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">interactiveConsumersControlPanel_loadConsumer()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">interactiveConsumersControlPanel_loadConsumer(string  <span class="argument">$key = null</span>) : \LTI_Tool_Consumer</pre>
+                <p><em>Create a (potentially new) LTI_Tool_Consumer</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$key </td>
+                                <td><p>(Optional)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \LTI_Tool_Consumer
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -931,7 +1045,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 1st, 2016 at 11:08.
+                    on August 4th, 2016 at 23:09.
                 </section>
             </section>
         </section>

@@ -13,5 +13,7 @@ if (strpos(__DIR__, '/vendor/')) {
 
 use smtech\StMarksSmarty\StMarksSmarty;
 
+session_start();
+
 $smarty = StMarksSmarty::getSmarty();
 $smarty->addTemplateDir(__DIR__ . '/templates', 'smtech/stmarks-reflexive-canvas-lti');
