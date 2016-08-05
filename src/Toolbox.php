@@ -53,7 +53,7 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
      */
     protected function loadConfiguration($configFilePath, $forceRecache = false)
     {
-        $result = parent::loadConfiguration($configFilePath, $forceRecache);
+        parent::loadConfiguration($configFilePath, $forceRecache);
 
         /* patch in passed back API access token, if present */
         if (!empty($_SESSION['TOOL_CANVAS_API'])) {
@@ -114,7 +114,7 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
                     'reason' => $reason
                 ])
             );
-            exit;
+            break;
         } else { /* no (understandable) API credentials available -- doh! */
             throw new ConfigurationException(
                 'Missing OAuth key/secret pair in configuration, which is ' .
@@ -174,7 +174,7 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
         /* what are we asked to do with this consumer? */
         switch ($action) {
             case 'update':
-            case 'insert': {
+            case 'insert':
                 $consumer->name = $name;
                 $consumer->secret = $secret;
                 $consumer->enabled = $enabled;
@@ -183,19 +183,16 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
                         'Error saving consumer',
                         'There was an error attempting to save your new or ' .
                         'updated consumer information to the database.',
-                        NotificationMessage::ERROR
+                        NotificationMessage::DANGER
                     );
                 }
                 break;
-            }
-            case 'delete': {
+            case 'delete':
                 $consumer->delete();
                 break;
-            }
-            case 'select': {
+            case 'select':
                 $this->smarty_assign('key', $key);
                 break;
-            }
         }
 
         /*
@@ -217,7 +214,6 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
             'appUrl' => $this->metadata['APP_URL']
         ]);
         $this->smarty_display('consumers-control-panel.tpl');
-        exit;
     }
 
     /**
@@ -233,7 +229,7 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
     /**
      * Get the cache manager
      *
-     * @return [type] [description]
+     * @return HierarchicalSimpleCache
      */
     public function getCache()
     {
@@ -358,6 +354,20 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
      */
     public function smarty_prependTemplateDir($template, $key = null) {
         return $this->getSmarty()->prependTemplateDir($template, $key);
+    }
+
+    /**
+     * Add a message to be displayed to the user
+     *
+     * @link https://htmlpreview.github.io/?https://raw.githubusercontent.com/battis/BootstrapSmarty/master/doc/classes/Battis.BootstrapSmarty.BootstrapSmarty.html#method_addMessage Pass-through to `BootstrapSmarty::addMessage()`
+     *
+     * @param string $title
+     * @param string $content,
+     * @param string $class (Optional, default `NotificationMessage::INFO`)
+     */
+    public function smarty_addMessage($title, $content, $class = NotificationMessage::INFO)
+    {
+        return $this->getSmarty()->addMessage($title, $content, $class);
     }
 
     /**

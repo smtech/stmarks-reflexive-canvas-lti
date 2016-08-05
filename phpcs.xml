@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <ruleset name="PSR-2">
+    <file>common.inc.php</file>
+    <file>error.php</file>
+    <file>oauth.php</file>
     <file>./src</file>
-    <file>./examples</file>
     <rule ref="PSR2"/>
 </ruleset>

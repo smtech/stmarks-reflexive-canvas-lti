@@ -8,7 +8,7 @@ if (!empty($_REQUEST['error'])) {
     $smarty->addMessage(
         $_REQUEST['error']['title'],
         $_REQUEST['error']['message'],
-        NotificationMessage::ERROR
+        NotificationMessage::DANGER
     );
 }
 

@@ -16,7 +16,7 @@ if (!empty($_REQUEST['oauth-error'])) {
 }
 
 /* do we have a Canvas instance URL yet? */
-if (empty($_SESSION['oauth']['instance']) && empty ($_REQUEST['url'])) {
+if (empty($_SESSION['oauth']['instance']) && empty($_REQUEST['url'])) {
     $smarty->assign([
         'formAction' => $_SERVER['PHP_SELF'],
         'reason' => (empty($_REQUEST['reason']) ? false : $_REQUEST['reason'])
@@ -51,7 +51,6 @@ if (!isset($_GET['code'])) {
         'may indicate CSRF attack.'
     );
     exit;
-
 } else {
     /*
      * acquire and save our token (using our existing code), pass back the
