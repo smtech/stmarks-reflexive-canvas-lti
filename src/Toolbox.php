@@ -362,7 +362,7 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
      * @link https://htmlpreview.github.io/?https://raw.githubusercontent.com/battis/BootstrapSmarty/master/doc/classes/Battis.BootstrapSmarty.BootstrapSmarty.html#method_addMessage Pass-through to `BootstrapSmarty::addMessage()`
      *
      * @param string $title
-     * @param string $content,
+     * @param string $content
      * @param string $class (Optional, default `NotificationMessage::INFO`)
      */
     public function smarty_addMessage($title, $content, $class = NotificationMessage::INFO)
