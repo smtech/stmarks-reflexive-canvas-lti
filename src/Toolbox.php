@@ -310,6 +310,7 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
     {
         if (empty($this->smarty)) {
             $this->smarty = StMarksSmarty::getSmarty();
+            $this->smarty->prependTemplateDir(realpath(__DIR__ . '/../templates'), __CLASS__);
             $this->smarty->setFramed(true);
         }
         return $this->smarty;
