@@ -114,7 +114,7 @@ class Toolbox extends \smtech\ReflexiveCanvasLTI\Toolbox
                     'reason' => $reason
                 ])
             );
-            break;
+            return;
         } else { /* no (understandable) API credentials available -- doh! */
             throw new ConfigurationException(
                 'Missing OAuth key/secret pair in configuration, which is ' .
