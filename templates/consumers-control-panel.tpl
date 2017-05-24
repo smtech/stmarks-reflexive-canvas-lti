@@ -1,6 +1,8 @@
 {assign var="formLabelWidth" value=$formLabelWidth|Default: 4}
 {extends file="subpage.tpl"}
 
+{block name="navigation-menu"}{/block}
+
 {block name="subcontent"}
 
 	<div class="container">
